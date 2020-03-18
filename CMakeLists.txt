@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(imgui_sfml
+project(imgui_sfml_sacxy
   LANGUAGES CXX
   VERSION 2.1
 )
@@ -73,15 +73,15 @@ endif()
 
 find_package(OpenGL REQUIRED)
 
-add_library(ImGui-SFML
+add_library(ImGui-SFML-SacXY
   imgui-SFML.cpp
   ${IMGUI_SOURCES}
 )
 
 # Add pretty alias
-add_library(ImGui-SFML::ImGui-SFML ALIAS ImGui-SFML)
+add_library(ImGui-SFML-SacXY::ImGui-SFML-SacXY ALIAS ImGui-SFML-SacXY)
 
-target_link_libraries(ImGui-SFML
+target_link_libraries(ImGui-SFML-SacXY
   PUBLIC
     sfml-graphics
     sfml-system
@@ -100,13 +100,13 @@ target_include_directories(ImGui-SFML
 
 if(NOT IMGUI_SFML_USE_DEFAULT_CONFIG)
   if (IMGUI_SFML_CONFIG_DIR)
-    target_include_directories(ImGui-SFML
+    target_include_directories(ImGui-SFML-SacXY
       PUBLIC
         $<BUILD_INTERFACE:${IMGUI_SFML_CONFIG_DIR}>
     )
 
     if (IMGUI_SFML_CONFIG_INSTALL_DIR)
-      target_include_directories(ImGui-SFML
+      target_include_directories(ImGui-SFML-SacXY
         PUBLIC
           $<INSTALL_INTERFACE:${IMGUI_SFML_CONFIG_INSTALL_DIR}>
       )
@@ -116,14 +116,14 @@ if(NOT IMGUI_SFML_USE_DEFAULT_CONFIG)
   endif()
 endif()
 
-target_compile_definitions(ImGui-SFML
+target_compile_definitions(ImGui-SFML-SacXY
   PUBLIC
     IMGUI_USER_CONFIG="${IMGUI_SFML_CONFIG_NAME}"
 )
 
 if(BUILD_SHARED_LIBS)
-  target_compile_definitions(ImGui-SFML PRIVATE IMGUI_SFML_SHARED_LIB)
-  set_target_properties(ImGui-SFML PROPERTIES
+  target_compile_definitions(ImGui-SFML-SacXY PRIVATE IMGUI_SFML_SHARED_LIB)
+  set_target_properties(ImGui-SFML-SacXY PROPERTIES
     DEFINE_SYMBOL "IMGUI_SFML_EXPORTS"
   )
 endif()
@@ -143,7 +143,7 @@ endif()
 
 list(APPEND IMGUI_SFML_PUBLIC_HEADERS "${IMGUI_PUBLIC_HEADERS}")
 
-set_target_properties(ImGui-SFML PROPERTIES
+set_target_properties(ImGui-SFML-SacXY PROPERTIES
   PUBLIC_HEADER "${IMGUI_SFML_PUBLIC_HEADERS}"
 )
 
@@ -152,16 +152,16 @@ if(IMGUI_SFML_BUILD_EXAMPLES)
 endif()
 
 # installation rules
-install(TARGETS ImGui-SFML
-  EXPORT ImGui-SFML
+install(TARGETS ImGui-SFML-SacXY
+  EXPORT ImGui-SFML-SacXY
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(EXPORT ImGui-SFML
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/ImGui-SFML
-  NAMESPACE ImGui-SFML::
+install(EXPORT ImGui-SFML-SacXY
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/ImGui-SFML-SacXY
+  NAMESPACE ImGui-SFML-SacXY::
   FILE ImGui-SFMLConfig.cmake
 )
