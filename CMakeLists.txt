@@ -91,7 +91,7 @@ target_link_libraries(ImGui-SFML-SacXY
 
 include(GNUInstallDirs)
 
-target_include_directories(ImGui-SFML
+target_include_directories(ImGui-SFML-SacXY
   PUBLIC
     $<BUILD_INTERFACE:${IMGUI_INCLUDE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
